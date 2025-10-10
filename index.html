@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduAIthon - The Future of Learning</title>
+    <!-- Load Tailwind CSS from CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Apply Inter font family and smooth scrolling */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f7f9fc; /* Very light subtle background */
+        }
+        /* Custom gradient for the hero section and buttons */
+        .gradient-bg {
+            background: linear-gradient(135deg, #4f46e5 0%, #a855f7 100%);
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(45deg, #4f46e5, #9333ea);
+        }
+        /* Icon styles for better visual separation */
+        .feature-icon {
+            display: inline-flex;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Chatbot Custom Styles */
+        #chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 90vw;
+            max-width: 400px;
+            height: 70vh;
+            max-height: 600px;
+            display: none; /* Initially hidden */
+            flex-direction: column;
+        }
+        #chat-window-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .chat-message-bot {
+            background-color: #f0f4f8; /* Light blueish grey */
+            border-radius: 12px 12px 12px 4px;
+        }
+        .chat-message-user {
+            background-color: #4f46e5; /* Primary indigo color */
+            border-radius: 12px 12px 4px 12px;
+            color: white;
+        }
+        
+        /* Custom styles for the Countdown Timer */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .time-box span {
+            font-size: 2.5rem; /* Large numbers */
+            line-height: 1;
+        }
+    </style>
+    <!-- Placeholder for Inter font if the browser doesn't have it -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Header / Navigation Bar (Updated Links) -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="#home" class="text-3xl font-extrabold text-gradient">EduAIthon</a>
+            </div>
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600 text-sm lg:text-base">
+                <a href="#home" class="hover:text-indigo-600 transition duration-150">Home</a>
+                <a href="#about" class="hover:text-indigo-600 transition duration-150">About</a>
+                <a href="#event" class="hover:text-indigo-600 transition duration-150">Event</a>
+                <a href="#registration" class="hover:text-indigo-600 transition duration-150">Registration</a>
+                <a href="#gallery" class="hover:text-indigo-600 transition duration-150">Gallery</a>
+                <a href="#helpdesk" class="hover:text-indigo-600 transition duration-150">Helpdesk</a>
+            </div>
+            <div class="hidden md:block">
+                <a href="#registration" class="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-150 transform hover:scale-105">
+                    Register Now
+                </a>
+            </div>
+            <!-- Mobile Menu Button (Placeholder for JS functionality) -->
+            <button class="md:hidden text-gray-600 hover:text-indigo-600 transition duration-150">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+    </header>
+    
+   
+
+    <!-- 1. Home Section (Hero) -->
+    <!-- Increased pb-48 (previously pb-24) to create more space for content above the wave -->
+    <section id="home" class="gradient-bg py-24 pb-48 sm:py-32 text-white overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
+                Unlock Your Potential with <span class="block lg:inline">AI-Powered Learning</span>
+            </h1>
+            <!-- Moved the descriptive text and buttons outside of the purple gradient area onto the white wave's background -->
+        </div>
+
+        <!-- Wave graphic positioning moved higher using bottom-0 and increased height (h-auto) -->
+        <div class="absolute inset-x-0 bottom-0 z-0">
+            <!-- Increased height of the wave container to cover more vertical space -->
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="w-full h-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Original wave path: adjusted the vertical position of the wave to start higher -->
+                <!-- Adjusted path to push the white section higher -->
+                <path d="M0 224L48 208C96 192 192 160 288 154.7C384 149 480 171 576 186.7C672 202 768 219 864 213.3C960 208 1056 181 1152 176C1248 171 1344 187 1392 194.7L1440 202.7V320H1392C1344 320 1248 320 1152 320C1056 320 960 320 864 320C768 320 672 320 576 320C480 320 384 320 288 320C192 320 96 320 48 320L0 320Z" fill="#f7f9fc"></path>
+            </svg>
+        </div>
+
+        <!-- Content that should sit on the white background -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 pt-12">
+            <!-- Now using text-gray-800 which is guaranteed to be readable on the white background -->
+            <p class="text-xl sm:text-2xl mb-10 max-w-3xl mx-auto text-gray-800 font-semibold">
+                EduAIthon delivers personalized education paths, instant AI tutoring, and deep performance insights tailored just for you.
+            </p>
+            <div class="space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#event" class="inline-block px-10 py-4 text-lg font-bold bg-indigo-600 text-white rounded-full shadow-2xl hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+                    View Upcoming Event
+                </a>
+                <a href="#about" class="inline-block px-10 py-4 text-lg font-bold border-2 border-indigo-600 text-indigo-600 bg-white rounded-full hover:bg-gray-100 transition duration-300 transform hover:scale-105">
+                    Learn About Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+     <!-- COUNTDOWN TIMER SECTION (Updated) -->
+    <section class="bg-white py-8 border-b border-indigo-100 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-700 mb-6">Countdown to the New Year's Product Launch!</h2>
+            <div id="timer" class="timer-grid max-w-2xl mx-auto" aria-live="polite">
+                <!-- Days Box -->
+                <div class="time-box bg-indigo-50 p-4 rounded-xl shadow-inner border border-indigo-200 text-indigo-700 font-extrabold">
+                    <span id="days" class="block">00</span>
+                    <p class="text-sm uppercase text-gray-500 font-medium mt-1">Days</p>
+                </div>
+                <!-- Hours Box -->
+                <div class="time-box bg-indigo-50 p-4 rounded-xl shadow-inner border border-indigo-200 text-indigo-700 font-extrabold">
+                    <span id="hours" class="block">00</span>
+                    <p class="text-sm uppercase text-gray-500 font-medium mt-1">Hours</p>
+                </div>
+                <!-- Minutes Box -->
+                <div class="time-box bg-indigo-50 p-4 rounded-xl shadow-inner border border-indigo-200 text-indigo-700 font-extrabold">
+                    <span id="minutes" class="block">00</span>
+                    <p class="text-sm uppercase text-gray-500 font-medium mt-1">Minutes</p>
+                </div>
+                <!-- Seconds Box -->
+                <div class="time-box bg-indigo-50 p-4 rounded-xl shadow-inner border border-indigo-200 text-indigo-700 font-extrabold">
+                    <span id="seconds" class="block">00</span>
+                    <p class="text-sm uppercase text-gray-500 font-medium mt-1">Seconds</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. About Section (Features and How It Works) -->
+    <section id="about" class="py-20 sm:py-32 bg-f7f9fc">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base font-semibold tracking-wider text-indigo-600 uppercase">INNOVATION IN EDUCATION</h2>
+                <p class="mt-2 text-4xl font-extrabold text-gray-900 sm:text-5xl">
+                    Smarter Tools for Better Results
+                </p>
+            </div>
+             <!-- Feature Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
+                <!-- Feature 1: Personalized Paths -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border border-indigo-100">
+                    <div class="feature-icon bg-indigo-100 text-indigo-600 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M10 20a10 10 0 114 0V5a4 4 0 00-8 0v15M13 8h-2"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Personalized Learning Paths</h3>
+                    <p class="text-gray-600">Our AI assesses your current knowledge and skill gaps to create a dynamic, optimized curriculum just for your pace.</p>
+                </div>
+                <!-- Feature 2: Instant Tutoring -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border border-indigo-100">
+                    <div class="feature-icon bg-purple-100 text-purple-600 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">24/7 AI Tutor Support</h3>
+                    <p class="text-gray-600">Get instant, detailed answers and explanations for complex topics. It's like having a dedicated expert on standby, always.</p>
+                </div>
+                <!-- Feature 3: Automated Feedback -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border border-indigo-100">
+                    <div class="feature-icon bg-green-100 text-green-600 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Real-Time Performance Feedback</h3>
+                    <p class="text-gray-600">Submit assignments and get comprehensive, actionable feedback in seconds, helping you improve faster than ever before.</p>
+                </div>
+                <!-- Feature 4: Progress Analytics -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border border-indigo-100">
+                    <div class="feature-icon bg-pink-100 text-pink-600 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Intuitive Progress Dashboards</h3>
+                    <p class="text-gray-600">Visualize your growth with detailed metrics. Identify your strengths and pinpoint areas needing more focus immediately.</p>
+                </div>
+            </div>
+           
+        </div>
+    </section>
+
+<!-- Vision & Mission Section -->
+<section id="vision-mission-section" aria-label="Our Vision and Mission" class="py-16 bg-gradient-to-r from-indigo-50 via-white to-purple-50 px-6 md:px-12">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-center text-indigo-900 mb-12">
+    Our Vision & Mission
+  </h2>
+
+  <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+
+    <!-- Vision -->
+    <div class="flex flex-col gap-6 p-6 rounded-2xl shadow-lg hover:shadow-indigo-300/40 transition duration-300 bg-white/80 backdrop-blur-md" tabindex="0">
+      <div class="flex items-center gap-4">
+        <svg class="w-10 h-10 text-indigo-600 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2s-3 1.343-3 3 1.343 3 3 3zM12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z"></path>
+        </svg>
+        <h3 class="text-xl md:text-2xl font-bold text-indigo-900">Our Vision</h3>
+      </div>
+      <p class="text-gray-700 leading-relaxed">
+        Our vision is to transform engineering education globally through innovative use of
+        <span class="text-indigo-700 font-semibold">Artificial Intelligence, Sustainable Practices, and Global Collaboration</span>.
+        We aim to create a world where educators and students are empowered to excel in a rapidly evolving AI-driven environment.
+      </p>
+    </div>
+
+    <!-- Mission -->
+    <div class="flex flex-col gap-6 p-6 rounded-2xl shadow-lg hover:shadow-purple-300/40 transition duration-300 bg-white/80 backdrop-blur-md" tabindex="0">
+      <div class="flex items-center gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-purple-600 flex-shrink-0">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="6"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+        </svg>
+        <h3 class="text-xl md:text-2xl font-bold text-purple-900">Our Mission</h3>
+      </div>
+      <p class="text-gray-700 leading-relaxed">
+        Our mission is to foster innovation in engineering education by providing a platform for knowledge sharing, AI-driven learning, and global collaboration. 
+        Through ICTIEE 2026, we support educators, researchers, and students in creating impactful solutions that advance education and empower the next generation of engineers.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- IUCEE 2026 Event Section -->
+<section id="event" class="relative py-24 sm:py-32 bg-gradient-to-br from-indigo-50 via-white to-purple-50 overflow-hidden">
+  <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+  <div class="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+
+    <!-- Header -->
+    <div class="text-center mb-20">
+      <h2 class="text-sm sm:text-base font-semibold tracking-widest text-purple-600 uppercase animate-pulse">
+        IUCEE presents ICTIEE 2026
+      </h2>
+      <p class="mt-3 text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-700 via-indigo-700 to-blue-700">
+        Transforming Teaching & Learning in the AI-Driven World
+      </p>
+      <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+        Join global educators, innovators, and leaders at <strong>ICTIEE 2026</strong> to explore how AI is reshaping education, engineering, and innovation.
+      </p>
+    </div>
+
+    <!-- Content Card -->
+    <div class="relative bg-white/70 backdrop-blur-md border border-indigo-100 shadow-2xl rounded-3xl lg:flex lg:items-center p-8 sm:p-12 hover:shadow-indigo-300/40 transition-shadow duration-300">
+      <!-- Left Content -->
+      <div class="lg:w-2/3 lg:pr-10">
+        <h3 class="text-3xl sm:text-4xl font-bold text-indigo-800 mb-5">
+          Keynote Speaker: Dr. Anya Sharma
+        </h3>
+        <p class="text-lg text-indigo-700 mb-8 leading-relaxed">
+          <strong>“Adaptive Assessments: Moving Beyond Standardized Testing”</strong><br>
+          Dr. Sharma, a pioneer in Cognitive AI and Educational Systems, will share groundbreaking research on how AI tools empower inclusive, personalized learning experiences across the globe.
+        </p>
+
+        <!-- Event Details -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 text-indigo-800 font-semibold">
+          <p class="flex items-center">
+            <svg class="w-6 h-6 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-4 4V3m-7 4h14M3 15h18M3 21h18"></path>
+            </svg>
+            <span>Date: January 7 – 10, 2026</span>
+          </p>
+
+          <p class="flex items-center">
+            <svg class="w-6 h-6 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Time: 9:00 AM – 6:00 PM IST</span>
+          </p>
+
+          <p class="flex items-center">
+            <svg class="w-6 h-6 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span>Venue: GITAM University, Bengaluru & Virtual</span>
+          </p>
+
+          <p class="flex items-center">
+            <svg class="w-6 h-6 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 0a8 8 0 11-16 0 8 8 0 0116 0z"></path>
+            </svg>
+            <span>Theme: Empowering Educators through AI & Innovation</span>
+          </p>
+        </div>
+
+        <!-- Button -->
+        <a href="#registration" class="inline-block px-10 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:scale-105 transform transition duration-200 hover:shadow-xl">
+          Register Now
+        </a>
+      </div>
+
+      <!-- Right Image / Poster -->
+      <!-- Right Image / Poster -->
+<div class="lg:w-1/3 mt-10 lg:mt-0 flex justify-center">
+  <div class="relative overflow-hidden rounded-2xl shadow-2xl transform transition-transform duration-300 hover:scale-105">
+    <img 
+      src="Assets/OIP.jpeg" 
+      alt="ICTIEE 2026 Event Poster"
+      class="w-full h-64 object-cover rounded-2xl"
+    />
+    <!-- Optional overlay text or gradient -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end justify-center rounded-2xl">
+      <p class="text-white font-semibold text-lg mb-3">ICTIEE 2026</p>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <!-- Bottom Tagline -->
+    
+  </div>
+</section>
+
+<!-- Registration Details Section -->
+<section id="registration" class="py-20 bg-gradient-to-br from-purple-50 via-white to-indigo-50 px-6 md:px-12">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-900 mb-8">Registration Details</h2>
+    <p class="text-lg text-gray-700 mb-12">
+      Join ICTIEE 2026 — choose the registration type that suits you. Early registration is recommended to secure your seat!
+    </p>
+
+    <!-- Registration Cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Author Registration -->
+      <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg border border-indigo-100 p-8 hover:shadow-indigo-300/40 transition duration-300">
+        <h3 class="text-2xl font-bold text-indigo-800 mb-4">Author / Presenter</h3>
+        <p class="text-gray-700 mb-6">
+          Participate as a speaker or paper author. Present your innovative research and network with global educators.
+        </p>
+        <p class="text-lg font-semibold text-indigo-700 mb-2">Early Bird: ₹10,000</p>
+        <p class="text-lg font-semibold text-indigo-700 mb-4">Regular: ₹12,000</p>
+        <a href="register.html" class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow hover:bg-indigo-700 transition transform hover:scale-105">
+          Register Now
+        </a>
+      </div>
+
+      <!-- Delegate Registration -->
+      <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg border border-purple-100 p-8 hover:shadow-purple-300/40 transition duration-300">
+        <h3 class="text-2xl font-bold text-purple-800 mb-4">Delegate / Attendee</h3>
+        <p class="text-gray-700 mb-6">
+          Attend sessions, workshops, and keynote talks. Ideal for educators, students, and industry professionals.
+        </p>
+        <p class="text-lg font-semibold text-purple-700 mb-2">Early Bird: ₹5,000</p>
+        <p class="text-lg font-semibold text-purple-700 mb-4">Regular: ₹6,000</p>
+        <a href="register.html" class="inline-block px-6 py-3 bg-purple-600 text-white font-semibold rounded-full shadow hover:bg-purple-700 transition transform hover:scale-105">
+          Register Now
+        </a>
+      </div>
+
+      <!-- Student Registration -->
+      <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg border border-pink-100 p-8 hover:shadow-pink-300/40 transition duration-300">
+        <h3 class="text-2xl font-bold text-pink-700 mb-4">Student / Researcher</h3>
+        <p class="text-gray-700 mb-6">
+          Participate as a student delegate. Gain insights, connect with experts, and explore opportunities for innovation.
+        </p>
+        <p class="text-lg font-semibold text-pink-600 mb-2">Early Bird: ₹3,000</p>
+        <p class="text-lg font-semibold text-pink-600 mb-4">Regular: ₹4,000</p>
+        <a href="register.html" class="inline-block px-6 py-3 bg-pink-600 text-white font-semibold rounded-full shadow hover:bg-pink-700 transition transform hover:scale-105">
+          Register Now
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Note -->
+    <p class="mt-12 text-gray-600 text-sm">
+      *All fees are subject to applicable taxes. Virtual participation is available for all registration types.
+    </p>
+  </div>
+</section>
+
+    
+    <!-- 5. Gallery Section -->
+    <section id="gallery" class="py-20 sm:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base font-semibold tracking-wider text-green-600 uppercase">COMMUNITY IN ACTION</h2>
+                <p class="mt-2 text-4xl font-extrabold text-gray-900 sm:text-5xl">
+                    Moments from Past EduAIthon Events
+                </p>
+                <p class="text-lg text-gray-500 mt-4">See how students and teachers engage with the future of learning.</p>
+            </div>
+            
+            <!-- Gallery Grid (3x2 layout) -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 lg:gap-8">
+                <div class="h-48 md:h-64 rounded-xl shadow-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <span class="text-gray-500 font-medium">Placeholder Image 1: Workshop</span>
+                </div>
+                <div class="h-48 md:h-64 rounded-xl shadow-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <span class="text-gray-500 font-medium">Placeholder Image 2: Keynote</span>
+                </div>
+                <div class="h-48 md:h-64 rounded-xl shadow-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <span class="text-gray-500 font-medium">Placeholder Image 3: Students Coding</span>
+                </div>
+                <div class="h-48 md:h-64 rounded-xl shadow-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <span class="text-gray-500 font-medium">Placeholder Image 4: Networking</span>
+                </div>
+                <div class="h-48 md:h-64 rounded-xl shadow-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <span class="text-gray-500 font-medium">Placeholder Image 5: Demo Day</span>
+                </div>
+                <div class="h-48 md:h-64 rounded-xl shadow-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <span class="text-gray-500 font-medium">Placeholder Image 6: Awards</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Helpdesk Section -->
+    <section id="helpdesk" class="py-20 sm:py-32 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold sm:text-5xl mb-4">Need Assistance? We're Here to Help.</h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto">
+                    Our dedicated support team and AI assistance are available 24/7 to ensure your learning journey is smooth.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-900">
+                <!-- Contact Card 1: Email -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl text-center">
+                    <div class="feature-icon bg-indigo-100 text-indigo-600 mx-auto mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Email Support</h3>
+                    <p class="text-gray-600 mb-4">For detailed inquiries or technical issues.</p>
+                    <a href="mailto:support@eduaithon.com" class="font-semibold text-indigo-600 hover:text-indigo-800 transition">support@eduaithon.com</a>
+                </div>
+
+                <!-- Contact Card 2: Live Chat Mockup -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl text-center">
+                    <div class="feature-icon bg-purple-100 text-purple-600 mx-auto mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.669a13.924 13.924 0 00.353-3.708C4.316 8.046 8.346 4 13 4s9 4.046 9 8z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">AI Chatbot (24/7)</h3>
+                    <p class="text-gray-600 mb-4">Instant answers from our EduAIthon bot.</p>
+                    <button onclick="toggleChat()" class="font-semibold text-white bg-indigo-600 px-6 py-2 rounded-full hover:bg-indigo-700 transition duration-150">Launch Chat</button>
+                </div>
+
+                <!-- Contact Card 3: Knowledge Base -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl text-center">
+                    <div class="feature-icon bg-green-100 text-green-600 mx-auto mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13M18.663 15.688c-.287.112-.596.162-.911.162-1.9 0-3.264-1.282-3.264-3.6 0-1.28.6-2.176 1.4-2.8.8-.624 1.872-1.12 3.14-1.12.31 0 .618.044.9.155m-3.9 4.192v2.48m0 0a.75.75 0 00-.75.75v.75m0-3.98l.001-.001m0 3.98v-2.48m0 0a.75.75 0 00.75-.75v-.75m0 3.98v2.48m0 0a.75.75 0 00.75-.75v-.75"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Documentation</h3>
+                    <p class="text-gray-600 mb-4">Find instant answers in our comprehensive articles.</p>
+                    <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-800 transition">Visit Knowledge Base</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Brand Info -->
+                <div>
+                    <h4 class="text-xl font-extrabold text-indigo-400 mb-4">EduAIthon</h4>
+                    <p class="text-sm text-gray-400">The modern way to learn. Empowering students and educators with cutting-edge AI.</p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-4 text-gray-300">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#about" class="hover:text-indigo-400 transition">About Us</a></li>
+                        <li><a href="#event" class="hover:text-indigo-400 transition">Event Schedule</a></li>
+                        <li><a href="#gallery" class="hover:text-indigo-400 transition">Gallery</a></li>
+                    </ul>
+                </div>
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-semibold mb-4 text-gray-300">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#helpdesk" class="hover:text-indigo-400 transition">Helpdesk</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold mb-4 text-gray-300">Connect</h4>
+                    <p class="text-sm text-gray-400">support@eduaithon.com</p>
+                    <div class="flex space-x-4 mt-3">
+                        <!-- Social Media Icons Placeholder -->
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
+                             <!-- Simple placeholder SVG for Twitter/X -->
+                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 4.3c.6-1.1 1.2-2.3 1.2-3.8 0-1.5-.6-2.7-1.2-3.8-.6-1.1-1.3-2-2.3-2.7-1-1.1-2.4-1.6-4.2-1.6-1.8 0-3.2.5-4.2 1.6-1.1 1.1-1.7 2.3-1.7 3.8 0 1.5.6 2.7 1.7 3.8 1 1.1 2.4 1.6 4.2 1.6 1.8 0 3.2-.5 4.2-1.6zm0 0"></path></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
+                            <!-- Simple placeholder SVG for LinkedIn -->
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8 11.8h2.6v7.4H8v-7.4zm3.8-3.3c0-1.3-1-2.3-2.3-2.3-1.3 0-2.3 1-2.3 2.3 0 1.3 1 2.3 2.3 2.3 1.3 0 2.3-1 2.3-2.3zm8.4 6.6c0 1.5-.7 2.4-2.5 2.4h-3.1V12h3.1c1.8 0 2.5.9 2.5 2.4z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center">
+                <p class="text-sm text-gray-500">&copy; 2024 EduAIthon. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- CHATBOT WIDGET -->
+    
+    <!-- Floating Chat Toggle Button -->
+    <button id="chat-window-toggle" onclick="toggleChat()" class="p-4 rounded-full gradient-bg text-white hover:bg-indigo-700 transition duration-300">
+        <!-- Chat Icon SVG -->
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"></path></svg>
+    </button>
+    
+    <!-- Chat Window Container -->
+    <div id="chat-widget" class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+        
+        <!-- Chat Header -->
+        <div class="gradient-bg p-4 flex justify-between items-center text-white">
+            <div class="flex items-center">
+                <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.307 9.875a1 1 0 01.3-.375c.427-.294 1.258-.2 1.954.218 1.137.674 1.8 1.57 1.8 2.516 0 1.05-.72 2.062-2.14 2.898-1.57.943-3.95 1.516-7.124 1.63L3.1 19.467A.5.5 0 003.5 20h17a.5.5 0 00.407-.875L20.4 17.65c-2.883-.105-5.32-.888-7.07-1.898-1.75-1.01-2.68-2.316-2.68-3.95 0-1.127.42-2.023 1.27-2.68 1.12-1.01 2.91-1.393 4.98-.947 1.22.26 2.21.64 3.01.996.8.35 1.22.6 1.41.6.43 0 .76-.17.96-.5a.5.5 0 00.12-.35V8a2 2 0 00-2-2H4a2 2 0 00-2 2v10a.5.5 0 00.807.375l.5-.5z"></path></svg>
+                <span class="font-semibold text-lg">EduAIthon Support Bot</span>
+            </div>
+            <button onclick="toggleChat()" class="p-1 rounded-full hover:bg-indigo-700 transition">
+                <!-- Close Icon SVG -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div id="chat-messages" class="flex-grow p-4 space-y-4 overflow-y-auto bg-gray-50">
+             <!-- Initial welcome message from the bot -->
+             <div class="flex justify-start">
+                <div class="chat-message-bot p-3 max-w-xs md:max-w-md shadow-md">
+                    Hello! I'm the EduAIthon support bot. I can answer questions about the event, registration, or our AI tools. How can I help you today?
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="p-4 border-t border-gray-200 bg-white">
+            <div class="flex items-center">
+                <input type="text" id="chat-input" placeholder="Ask a question..." class="flex-grow p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" onkeydown="if(event.key === 'Enter') sendMessage()">
+                <button id="send-button" onclick="sendMessage()" class="ml-3 p-3 gradient-bg text-white rounded-full hover:opacity-90 transition duration-150 transform hover:scale-105" disabled>
+                    <!-- Send Icon SVG -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </div>
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="text-xs text-indigo-500 mt-2 hidden">
+                AI is thinking...
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript for Countdown and Chatbot Functionality -->
+    <script>
+        // --- Countdown Timer Logic ---
+
+        function startCountdown(targetDateString) {
+            // Target date for the event: January 02, 2026, 9:00 AM EST
+            const target = new Date(targetDateString).getTime();
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minsEl = document.getElementById('minutes');
+            const secsEl = document.getElementById('seconds');
+
+            if (!daysEl || !hoursEl || !minsEl || !secsEl) {
+                console.error("Countdown elements not found.");
+                return;
+            }
+
+            function update() {
+                const now = Date.now();
+                const diff = target - now;
+                
+                // If the countdown is over
+                if (diff <= 0) {
+                    daysEl.innerText = '00';
+                    hoursEl.innerText = '00';
+                    minsEl.innerText = '00';
+                    secsEl.innerText = '00';
+                    // Optional: Display a message when the event is happening
+                    document.querySelector('section.bg-white h2').innerText = "The New Year's Launch is Live!";
+                    clearInterval(timer);
+                    return;
+                }
+
+                // Calculate time components
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                // Update the DOM elements, ensuring two digits (padStart)
+                daysEl.innerText = String(d).padStart(2, '0');
+                hoursEl.innerText = String(h).padStart(2, '0');
+                minsEl.innerText = String(m).padStart(2, '0');
+                secsEl.innerText = String(s).padStart(2, '0');
+            }
+
+            // Start the countdown immediately and then update every second
+            update();
+            const timer = setInterval(update, 1000);
+        }
+
+        // --- Chatbot Logic (Remains unchanged) ---
+
+        const chatWidget = document.getElementById('chat-widget');
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.getElementById('chat-messages');
+        const loadingIndicator = document.getElementById('loading-indicator');
+
+        // Enable send button only when input has text
+        chatInput.addEventListener('input', () => {
+            sendButton.disabled = chatInput.value.trim() === '';
+        });
+
+        function toggleChat() {
+            chatWidget.style.display = chatWidget.style.display === 'flex' ? 'none' : 'flex';
+            if (chatWidget.style.display === 'flex') {
+                chatInput.focus();
+                scrollToBottom();
+            }
+        }
+
+        function scrollToBottom() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addMessage(sender, text) {
+            const messageContainer = document.createElement('div');
+            messageContainer.classList.add('flex', 'p-1');
+            
+            const messageBubble = document.createElement('div');
+            messageBubble.classList.add('p-3', 'max-w-xs', 'md:max-w-md', 'shadow-md', 'whitespace-pre-wrap');
+
+            if (sender === 'user') {
+                messageContainer.classList.add('justify-end');
+                messageBubble.classList.add('chat-message-user');
+            } else {
+                messageContainer.classList.add('justify-start');
+                messageBubble.classList.add('chat-message-bot');
+            }
+
+            // Simple Markdown to HTML conversion for bold/italics
+            const formattedText = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+
+            messageBubble.innerHTML = formattedText;
+            messageContainer.appendChild(messageBubble);
+            chatMessages.appendChild(messageContainer);
+            scrollToBottom();
+        }
+
+        async function fetchGeminiResponse(userPrompt, maxRetries = 3) {
+            const apiKey = ""; // API Key will be injected by the environment
+            const model = "gemini-2.5-flash-preview-05-20";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            
+            const systemPrompt = "You are a helpful and friendly support assistant for EduAIthon, an AI-powered learning and event platform. Be concise and encouraging. Address the user's question directly, keeping the answers relevant to the website's content (events, registration, learning tools, helpdesk).";
+
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                // Use Google Search grounding to make the answers more factual if needed
+                tools: [{ "google_search": {} }],
+            };
+
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        // Throw error to trigger retry or catch block
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I encountered an unexpected error generating a response.";
+                    return text;
+
+                } catch (error) {
+                    console.error(`Attempt ${i + 1} failed:`, error);
+                    if (i < maxRetries - 1) {
+                        const delay = Math.pow(2, i) * 1000; // Exponential backoff
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                    } else {
+                        // Final failure
+                        return "I apologize, but I'm having trouble connecting to my knowledge base right now. Please try again later or contact us via email.";
+                    }
+                }
+            }
+        }
+
+        async function sendMessage() {
+            const prompt = chatInput.value.trim();
+            if (prompt === "") return;
+
+            // 1. Display user message
+            addMessage('user', prompt);
+            chatInput.value = '';
+            sendButton.disabled = true;
+
+            // 2. Show loading indicator
+            loadingIndicator.classList.remove('hidden');
+
+            // 3. Fetch AI response
+            const aiResponse = await fetchGeminiResponse(prompt);
+            
+            // 4. Hide loading indicator
+            loadingIndicator.classList.add('hidden');
+
+            // 5. Display AI response
+            addMessage('bot', aiResponse);
+            sendButton.disabled = false; // Re-enable for new input
+        }
+
+        // Add event listener for Enter key on the input field
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !sendButton.disabled) {
+                e.preventDefault(); // Prevent default form submission behavior
+                sendMessage();
+            }
+        });
+        
+        // --- Initialization ---
+        window.onload = function() {
+            // Start the countdown for the event on January 02, 2026 at 9:00 AM EST
+            startCountdown('January 02, 2026 09:00:00 EST');
+        };
+    </script>
+
+</body>
+</html>
